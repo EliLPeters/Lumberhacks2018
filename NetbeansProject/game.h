@@ -21,16 +21,16 @@ class game
 public:
     game()
     {
-        initscr();
-        keypad(stdscr, TRUE);
-        printw("hello wordl!\n");
-        refresh();
-        getch();
+        void launch();
     }
     
     void hello()
     {
         
+    }
+    
+    void launch()
+    {
     }
     
     ~game()
