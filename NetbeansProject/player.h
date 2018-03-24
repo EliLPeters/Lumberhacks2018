@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   player.h
- * Author: eli
+ * Authors: Eli Peters <ADD YOUR NAMES>
+ * Project: Lumberhacks 2018 entry
  *
  * Created on March 23, 2018, 9:25 PM
  */
@@ -14,16 +9,28 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-class player : unit
+#include "monster.h"
+
+using namespace std;
+
+class player : public unit
 {
-    player()
+    // Constructor
+    player(string sName)
+    {
+        _name = sName;
+    }
+    
+    // Destructor
+    ~player()
     {
         
     }
     
-    ~player()
+    void attack(monster enemy)
     {
-        
+        enemy.changeHP(0);
+        changeHP(enemy.damage());
     }
 };
 

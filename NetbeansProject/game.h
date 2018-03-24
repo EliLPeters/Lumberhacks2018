@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   game.h
- * Author: eli
+ * Authors: Eli Peters <ADD YOUR NAMES>
+ * Project: Lumberhacks 2018 entry
  *
  * Created on March 23, 2018, 7:44 PM
  */
@@ -16,13 +11,25 @@
 
 #include <ncurses.h>
 
+using namespace std;
+
 class game
 {
+private:
+    bool _terminate = false;
+    
 public:
     game()
     {
         void launch();
-        void play();
+        //while(_terminate == false)
+        //{
+            mainMenu();
+            //if(_terminate == false)
+            //{
+                void play();
+            //{
+        //}
     }
     
     void hello()
@@ -41,6 +48,11 @@ public:
         printw("Welcome to the game.");
         getch();
         clear();
+    }
+    
+    void mainMenu()
+    {
+        // TODO: fill in, give a way to set _terminate to true
     }
     
     void play()

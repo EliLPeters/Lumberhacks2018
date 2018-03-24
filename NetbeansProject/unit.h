@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /* 
  * File:   unit.h
- * Author: eli
+ * Authors: Eli Peters <ADD YOUR NAMES>
+ * Project: Lumberhacks 2018 entry
  *
  * Created on March 23, 2018, 9:24 PM
  */
@@ -14,16 +9,43 @@
 #ifndef UNIT_H
 #define UNIT_H
 
+#include <string>
+
+using namespace std;
+
 class unit
 {
+protected:
+    
+    int _HP = 0;
+    string _name = "";
+    
+public:
+    // Constructor
     unit()
     {
         
     }
     
+    // Destructor
     ~unit()
     {
         
+    }
+    
+    int getHP()
+    {
+        return _HP;
+    }
+    
+    int changeHP(int change)
+    {
+        _HP += change;
+    }
+    
+    string getName()
+    {
+        return _name;
     }
 };
 
