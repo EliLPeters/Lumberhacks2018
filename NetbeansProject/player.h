@@ -21,6 +21,8 @@ public:
     {
         _symbol = '@';
         _name = sName;
+        _X = 10;
+        _Y = 10;
     }
     
     // Destructor
@@ -29,19 +31,13 @@ public:
         
     }
     
-    void initialize()
-    {
-        _X = 10;
-        _Y = 10;
-    }
-    
     void attack(monster& enemy)
     {
         enemy.changeHP(0);
         changeHP(enemy.damage());
     }
     
-    void move(char ch)
+    void move(int ch)
     {
         switch(ch)
         {
@@ -53,8 +49,10 @@ public:
                 break;
             case 'k':
                 _Y += 1;
+                break;
             case 'l':
                 _X += 1;
+                break;
         }
             
     }

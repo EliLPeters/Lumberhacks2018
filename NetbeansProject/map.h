@@ -137,7 +137,7 @@ public:
     
     bool isWall(int x, int y)
     {
-        if(_cur_room[y][x] == '#')
+        if(_cur_room[x][y] == '#')
         {
             return true;
         }
@@ -149,7 +149,7 @@ public:
     
     bool isDoor(int x, int y)
     {
-        if(_cur_room[y][x] == '_' || _cur_room[y][x] == '|')
+        if(_cur_room[x][y] == '_' || _cur_room[y][x] == '|')
         {
             return true;
         }

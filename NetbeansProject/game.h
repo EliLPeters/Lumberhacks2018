@@ -46,19 +46,13 @@ public:
         while(_terminate == false)
         {
             mainMenu();
-            if(_terminate == false)
-            {
-                clear();
-                play();
-            }
         }
     }
     
     void mainMenu()
     {
-        bool play = false;
         int choice = 0;
-        while(_terminate == false && play == false)
+        while(_terminate == false)
         {
             move(0,0);
             printw("  Play");
@@ -80,11 +74,10 @@ public:
                 switch(choice)
                 {
                     case 0:
-                        play = true;
-                        break;
+                        play();
                     case 2:
                         _terminate = true;
-                        break;
+                        return;
                 }
             }
         }
@@ -94,24 +87,49 @@ public:
     {
         player p = player("test");
         
-        mvaddch(p.getX(), p.getY(), p.getSymbol());
+        mvaddch(p.getY(), p.getX(), p.getSymbol());
         m.drawMap();
+        int ch = getchar();
         while(true)
         {
-            char ch = getchar();
-            if(ch == 'x')
+            switch(ch)
             {
-                clear();
-                refresh();
-                return;
+                case 'x':
+                    clear();
+                    refresh();
+                    return;
+                case 'i':
+                    if(!m.isWall(p.getX(), (p.getY() - 1)))
+                    {
+                        p.move(ch);
+                    }
+                    break;
+                case 'j':
+                    if(!m.isWall((p.getX() - 1), p.getY()))
+                    {
+                        p.move(ch);
+                    }
+                    break;
+                case 'k':
+                    if(!m.isWall(p.getX(), (p.getY() + 1)))
+                    {
+                        p.move(ch);
+                    }
+                    break;
+                case 'l':
+                    if(!m.isWall((p.getX() + 1), p.getY()))
+                    {
+                        p.move(ch);
+                    }
+                    break;
             }
             
             p.move(ch);
-            
-            mvaddch(p.getX(), p.getY(), p.getSymbol());
-            
+            clear();
+            mvaddch(p.getY(), p.getX(), p.getSymbol());
             m.drawMap();
             refresh();
+            ch = getchar();
         }
         
         return;
