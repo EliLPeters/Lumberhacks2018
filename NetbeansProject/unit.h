@@ -18,6 +18,8 @@ class unit
 protected:
     
     int _HP = 0;
+    int _DEX = 0;
+    int _STR = 0;
     string _name = "";
     
 public:
@@ -51,6 +53,16 @@ public:
     virtual void move(char ch)
     {
         
+    }
+    
+    int getDEX()
+    {
+        return _DEX;
+    }
+    
+    int getSTR()
+    {
+        return _STR;
     }
 };
 
