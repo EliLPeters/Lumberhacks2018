@@ -21,7 +21,7 @@ public:
     
     void drawMap()
     {
-        drawBorder();
+        drawBorder2();
         
     }
     
@@ -45,6 +45,30 @@ public:
         for (int i = 0; i < LINES; i++)
         {
             move(i,COLS-1);
+            addch('#');
+        }
+    }
+    
+    void drawBorder2()
+    {
+        for (int i = 0; i < 20; i++)
+        {
+            move(i,0);
+            addch('#');
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            move(0,i);
+            addch('#');
+        }
+        for (int i = 0; i < 19; i++)
+        {
+            move(19,i);
+            addch('#');
+        }
+        for (int i = 0; i < 20; i++)
+        {
+            move(i,19);
             addch('#');
         }
     }

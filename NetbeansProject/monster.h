@@ -14,10 +14,11 @@ using namespace std;
 class monster : public unit
 {
 public:
-    monster(string sName, int sHP)
+    monster(string sName, int sHP, char sSymbol)
     {
         _name = sName;
         _HP = sHP;
+        _symbol = sSymbol;
     }
     
     ~monster()

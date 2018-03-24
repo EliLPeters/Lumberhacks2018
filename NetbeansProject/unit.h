@@ -24,6 +24,8 @@ protected:
     int _X = 0;
     int _Y = 0;
     
+    char _symbol = ' ';
+    
     string _name = "";
     
 public:
@@ -77,6 +79,11 @@ public:
     int getY()
     {
         return _Y;
+    }
+    
+    char getSymbol()
+    {
+        return _symbol;
     }
 };
 

@@ -36,7 +36,7 @@ public:
             mainMenu();
             //if(_terminate == false)
             //{
-                void play();
+                void play2();
             //{
         //}
     }
@@ -118,6 +118,27 @@ public:
             {
                 
             }
+            m.drawMap();
+            refresh();
+        }
+        
+        return;
+    }
+    
+    void play2()
+    {
+        player p = player("test");
+        
+        mvaddch(p.getX(), p.getY(), p.getSymbol());
+        m.drawMap();
+        while(true)
+        {
+            char ch = getchar();
+            
+            p.move(ch);
+            
+            mvaddch(p.getX(), p.getY(), p.getSymbol());
+            
             m.drawMap();
             refresh();
         }

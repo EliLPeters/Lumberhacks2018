@@ -15,9 +15,11 @@ using namespace std;
 
 class player : public unit
 {
+public:
     // Constructor
     player(string sName)
     {
+        _symbol = '@';
         _name = sName;
     }
     
@@ -27,10 +29,34 @@ class player : public unit
         
     }
     
-    void attack(monster enemy)
+    void initialize()
+    {
+        _X = 10;
+        _Y = 10;
+    }
+    
+    void attack(monster& enemy)
     {
         enemy.changeHP(0);
         changeHP(enemy.damage());
+    }
+    
+    void move(char ch)
+    {
+        switch(ch)
+        {
+            case 'i':
+                _Y -= 1;
+                break;
+            case 'j':
+                _X -= 1;
+                break;
+            case 'k':
+                _Y += 1;
+            case 'l':
+                _X += 1;
+        }
+            
     }
 };
 
