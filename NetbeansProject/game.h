@@ -10,7 +10,12 @@
 #define GAME_H
 
 #include <ncurses.h>
+#include <vector>
+
 #include "map.h"
+#include "unit.h"
+#include "monster.h"
+#include "player.h"
 
 using namespace std;
 
@@ -19,6 +24,8 @@ class game
 private:
     bool _terminate = false;
     map m = map();
+    
+    vector<monster> _monster_vector;
     
 public:
     game()

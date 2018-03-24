@@ -20,6 +20,10 @@ protected:
     int _HP = 0;
     int _DEX = 0;
     int _STR = 0;
+    
+    int _X = 0;
+    int _Y = 0;
+    
     string _name = "";
     
 public:
@@ -63,6 +67,16 @@ public:
     int getSTR()
     {
         return _STR;
+    }
+    
+    int getX()
+    {
+        return _X;
+    }
+    
+    int getY()
+    {
+        return _Y;
     }
 };
 
