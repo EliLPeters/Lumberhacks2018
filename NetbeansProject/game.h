@@ -123,8 +123,6 @@ public:
                     }
                     break;
             }
-            
-            p.move(ch);
             clear();
             mvaddch(p.getY(), p.getX(), p.getSymbol());
             m.drawMap();

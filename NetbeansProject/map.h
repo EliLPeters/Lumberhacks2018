@@ -137,7 +137,7 @@ public:
     
     bool isWall(int x, int y)
     {
-        if(_cur_room[x][y] == '#')
+        if(_cur_room[y][x] == '#')
         {
             return true;
         }
