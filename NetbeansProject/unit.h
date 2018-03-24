@@ -47,6 +47,11 @@ public:
     {
         return _name;
     }
+    
+    virtual void move(char ch)
+    {
+        
+    }
 };
 
 
