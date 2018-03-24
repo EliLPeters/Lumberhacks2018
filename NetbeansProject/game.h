@@ -11,6 +11,7 @@
 
 #include <ncurses.h>
 #include <vector>
+#include <string>
 
 #include "map.h"
 #include "unit.h"
@@ -36,30 +37,21 @@ public:
         cbreak();
         keypad(stdscr, TRUE);
         curs_set(0);
-        string temp = "Welcome! Press any key to continue.";
-        move(0,((COLS / 2) - (temp.length() / 2)));
-        printw(temp.c_str());
+        string welcome = "Welcome! press any key to continue!";
+        move(0,((COLS / 2) - (welcome.length() / 2)));
+        printw(welcome.c_str());
+        refresh();
         getch();
         clear();
-        //while(_terminate == false)
-        //{
+        while(_terminate == false)
+        {
             mainMenu();
-            //if(_terminate == false)
-            //{
-                void play2();
-            //{
-        //}
-    }
-    
-    void hello()
-    {
-        
-    }
-    
-    void launch()
-    {
-        
-        
+            if(_terminate == false)
+            {
+                clear();
+                play();
+            }
+        }
     }
     
     void mainMenu()
@@ -100,67 +92,6 @@ public:
     
     void play()
     {
-        char ch;
-        int row = 10;
-        int col = 10;
-        char guy = '@';
-        mvaddch(row,col,guy);
-        
-        while(true)
-        {
-            ch = getch();
-            
-            if(ch == 'q')
-            {
-                clear();
-                break;
-            }
-            else if(ch == 'i')
-            {
-                clear();
-                if(row > 1) {row--;}
-                   
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else if(ch == 'k')
-            {
-                clear();
-                if (row < LINES-2) {row++;}
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else if(ch == 'l')
-            {
-                clear();
-                if (col < COLS-2){col++;}
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else if(ch == 'j')
-            {
-                clear();
-                if (col > 1) {col--;}  
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else
-            {
-                
-            }
-            m.drawMap();
-            refresh();
-        }
-        
-        return;
-    }
-    
-    void play2()
-    {
         player p = player("test");
         
         mvaddch(p.getX(), p.getY(), p.getSymbol());
@@ -168,6 +99,12 @@ public:
         while(true)
         {
             char ch = getchar();
+            if(ch == 'x')
+            {
+                clear();
+                refresh();
+                return;
+            }
             
             p.move(ch);
             
