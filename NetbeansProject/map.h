@@ -13,8 +13,35 @@ using namespace std;
 
 class map
 {
+public:
     map()
     {
+        void drawMap();
+    }
+    
+    void drawMap()
+    {
+        for (int i = 0; i < LINES; i++)
+        {
+            addch('#');
+            move(i,0);
+        }
+        for (int i = 0; i < COLS; i++)
+        {
+            addch('#');
+            move(0,i);
+        }
+        for (int i = 0; i < COLS-1; i++)
+        {
+            addch('#');
+            move(LINES-1,i);
+        }
+        for (int i = 0; i < LINES; i++)
+        {
+            addch('#');
+            move(i,COLS-1);
+        }
+        
         
     }
     
