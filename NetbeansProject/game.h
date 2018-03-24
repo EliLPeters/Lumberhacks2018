@@ -30,7 +30,17 @@ private:
 public:
     game()
     {
-        void launch();
+        initscr();
+        clear();
+        noecho();
+        cbreak();
+        keypad(stdscr, TRUE);
+        curs_set(0);
+        string temp = "Welcome! Press any key to continue.";
+        move(0,((COLS / 2) - (temp.length() / 2)));
+        printw(temp.c_str());
+        getch();
+        clear();
         //while(_terminate == false)
         //{
             mainMenu();
@@ -49,19 +59,43 @@ public:
     void launch()
     {
         
-        initscr();
-        clear();
-        noecho();
-        cbreak();
-        keypad(stdscr, TRUE);
-        curs_set(0);
-        getch();
-        clear();
+        
     }
     
     void mainMenu()
     {
-        // TODO: fill in, give a way to set _terminate to true
+        bool play = false;
+        int choice = 0;
+        while(_terminate == false && play == false)
+        {
+            move(0,0);
+            printw("  Play");
+            move(2,0);
+            printw("  Quit");
+            mvaddch(choice, 0, '>');
+            refresh();
+            int ch = getch();
+            if(ch == KEY_UP)
+            {
+                choice = 0;
+            }
+            else if(ch == KEY_DOWN)
+            {
+                choice = 2;
+            }
+            else if(ch == 10)
+            {
+                switch(choice)
+                {
+                    case 0:
+                        play = true;
+                        break;
+                    case 2:
+                        _terminate = true;
+                        break;
+                }
+            }
+        }
     }
     
     void play()
