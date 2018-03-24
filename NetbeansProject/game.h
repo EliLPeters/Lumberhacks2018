@@ -10,6 +10,7 @@
 #define GAME_H
 
 #include <ncurses.h>
+#include "map.h"
 
 using namespace std;
 
@@ -17,6 +18,7 @@ class game
 {
 private:
     bool _terminate = false;
+    map m = map();
     
 public:
     game()
@@ -39,13 +41,13 @@ public:
     
     void launch()
     {
+        
         initscr();
         clear();
         noecho();
         cbreak();
         keypad(stdscr, TRUE);
         curs_set(0);
-        printw("Welcome to the game.");
         getch();
         clear();
     }
@@ -77,31 +79,35 @@ public:
                 clear();
                 row--;
                 mvaddch(row,col,guy);
+                //m.drawMap();
             }
             else if(ch == 'k')
             {
                 clear();
                 row++;
                 mvaddch(row,col,guy);
+                //m.drawMap();
             }
             else if(ch == 'l')
             {
                 clear();
                 col++;
                 mvaddch(row,col,guy);
+                //m.drawMap();
             }
             else if(ch == 'j')
             {
                 clear();
                 col--;
                 mvaddch(row,col,guy);
+                //m.drawMap();
             }
             else
             {
                 clear();
                 printw("yeah");
             }
-          
+            m.drawMap();
             refresh();
         }
         
