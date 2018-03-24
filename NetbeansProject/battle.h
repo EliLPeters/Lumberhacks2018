@@ -40,14 +40,32 @@ public:
     
     void drawBattleField()
     {
-        
-        m.drawBorder();
+        for (int i = 0; i < COLS-1; i++)
+        {
+            addch('#');
+            move(0,i);
+        }
+        for (int i = 0; i < COLS-1; i++)
+        {
+            addch('#');
+            move(LINES-1,i);
+        }        
+        for (int i = 0; i < LINES-1; i++)
+        {
+            addch('#');
+            move(i,0);
+        }        
+        for (int i = 0; i < LINES-1; i++)
+        {
+            addch('#');
+            move(i,COLS-1);
+        }
     }
     
     void moveMonster(int &posX, int &posY,bool &flipX, bool &flipY)
     {
-        usleep(50000);
-        mvaddch(posX,posY,'$');
+        usleep(100000);
+        mvaddch(posY,posX,'$');
         
         //Side to side movement
         
@@ -55,52 +73,50 @@ public:
         {
             if(chaX > posX)
             {
-                posX++;
+                if(posX < COLS){posX++;}
             }
             else
             {
-                posX--;
+                if(posX > 0){posX--;}
             }
         }
         else
         {
             if(chaX > posX)
             {
-                posX--;
+                if(posX > 0){posX--;}
             }
             else
             {
-                posX++;
+                if(posX < COLS){posX++;}
             }   
         }
-            
-        if (posY > COLS)
-        {
-            flipX = false;
-        }
-        if (posY < 1)
-        {
-            flipX = true;
-        }
+        
+        
+        
         
         //Up and down movement
         if (flipY == true)
         {
-            posX++;
-            
+           if(chaY > posY)
+            {
+                if(posY < LINES-2){posY++;}
+            }
+            else
+            {
+                if(posY > 0){posY--;}
+            } 
         }
         else
         {
-            posX--;
-        }
-            
-        if (posX > LINES-1)
-        {
-            flipY = false;
-        }
-        if (posX < 1)
-        {
-            flipY = true;
+            if(chaY > posX)
+            {
+                if(posY > 0){posY--;}
+            }
+            else
+            {
+                if(posY < LINES-2){posY++;}
+            }
         }
         
         
@@ -152,37 +168,15 @@ public:
     void battleSequence()
     {
         char ch;
-        int ctrA = 0, ctrB = 0;
-        posX = randGen();
-        posY = randGen();
         
         while(true)
         {
-            ch = getch();
-            if(ch == 'q')
-            {
-                break;
-            }
-            
-            if(ctrA > randGen())
-            {
-                flipX = coinFlip();
-                ctrA = 0;
-            }
-            else if(ctrB > randGen())
-            {
-                flipY = coinFlip();
-                ctrB = 0;
-            }
-            
             clear();
+            flipX = coinFlip();
+            flipY = coinFlip();
             drawBattleField();
             moveMonster(posX,posY,flipX,flipY);
-
-
-            moveChar(chaX,chaY);
-            ctrA++;
-            ctrB++;
+            moveChar(chaX,chaY);    
             refresh();
         }
         
