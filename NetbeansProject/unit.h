@@ -40,7 +40,7 @@ public:
     
     int changeHP(int change)
     {
-        _HP += change;
+        _HP -= change;
     }
     
     string getName()
