@@ -21,27 +21,36 @@ public:
     
     void drawMap()
     {
+        drawBorder();
+        
+    }
+    
+    void drawBorder()
+    {
         for (int i = 0; i < LINES; i++)
         {
-            addch('#');
             move(i,0);
+            addch('#');
         }
         for (int i = 0; i < COLS; i++)
         {
-            addch('#');
             move(0,i);
+            addch('#');
         }
         for (int i = 0; i < COLS-1; i++)
         {
-            addch('#');
             move(LINES-1,i);
+            addch('#');
         }
         for (int i = 0; i < LINES; i++)
         {
-            addch('#');
             move(i,COLS-1);
+            addch('#');
         }
-        
+    }
+    
+    void drawObstacles()
+    {
         
     }
     

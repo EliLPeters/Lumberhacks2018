@@ -77,35 +77,39 @@ public:
             else if(ch == 'i')
             {
                 clear();
-                row--;
+                if(row > 1) {row--;}
+                   
+                
                 mvaddch(row,col,guy);
                 //m.drawMap();
             }
             else if(ch == 'k')
             {
                 clear();
-                row++;
+                if (row < LINES-2) {row++;}
+                
                 mvaddch(row,col,guy);
                 //m.drawMap();
             }
             else if(ch == 'l')
             {
                 clear();
-                col++;
+                if (col < COLS-2){col++;}
+                
                 mvaddch(row,col,guy);
                 //m.drawMap();
             }
             else if(ch == 'j')
             {
                 clear();
-                col--;
+                if (col > 1) {col--;}  
+                
                 mvaddch(row,col,guy);
                 //m.drawMap();
             }
             else
             {
-                clear();
-                printw("yeah");
+                
             }
             m.drawMap();
             refresh();
