@@ -76,9 +76,19 @@ public:
         return _X;
     }
     
+    int setX(int x)
+    {
+        _X = x;
+    }
+    
     int getY()
     {
         return _Y;
+    }
+    
+    int setY(int y)
+    {
+        _Y = y;
     }
     
     char getSymbol()
