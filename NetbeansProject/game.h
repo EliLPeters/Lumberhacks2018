@@ -182,6 +182,11 @@ public:
             mvaddch(p.getY(), p.getX(), p.getSymbol());
             for(int i = 0; i < _monster_vector.size(); i++)
             {
+                if(_monster_vector[i].getX() == p.getX() && _monster_vector[i].getY() == p.getY())
+                {
+                    battle b = battle(_monster_vector[i], p);
+                    b.battleSequence();
+                }
                 if(_monster_vector[i].isDead() == false)
                 {
                     mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
