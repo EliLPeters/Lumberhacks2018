@@ -99,27 +99,43 @@ public:
                     refresh();
                     return;
                 case 'i':
-                    if(!m.isWall(p.getX(), (p.getY() - 1)))
+                    if(!m.isWall(p.getX(), (p.getY() - 1)) && !m.isDoor(p.getX(), (p.getY() - 1)))
                     {
                         p.move(ch);
+                    }
+                    else if(m.isDoor(p.getX(), (p.getY() - 1)))
+                    {
+                        
                     }
                     break;
                 case 'j':
-                    if(!m.isWall((p.getX() - 1), p.getY()))
+                    if(!m.isWall((p.getX() - 1), p.getY()) && !m.isDoor((p.getX() - 1), p.getY()))
                     {
                         p.move(ch);
+                    }
+                    else if(m.isDoor((p.getX() - 1), p.getY()))
+                    {
+                        
                     }
                     break;
                 case 'k':
-                    if(!m.isWall(p.getX(), (p.getY() + 1)))
+                    if(!m.isWall(p.getX(), (p.getY() + 1)) && !m.isDoor(p.getX(), (p.getY() + 1)))
                     {
                         p.move(ch);
                     }
+                    else if(m.isDoor(p.getX(), (p.getY() + 1)))
+                    {
+                        
+                    }
                     break;
                 case 'l':
-                    if(!m.isWall((p.getX() + 1), p.getY()))
+                    if(!m.isWall((p.getX() + 1), p.getY()) && !m.isDoor((p.getX() + 1), p.getY()))
                     {
                         p.move(ch);
+                    }
+                    else if(m.isDoor((p.getX() + 1), p.getY()))
+                    {
+                        
                     }
                     break;
             }
