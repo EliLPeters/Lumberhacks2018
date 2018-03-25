@@ -37,6 +37,7 @@ public:
             return false;
         }
     }
+    
     void moveWorld(player& p)
     {
         int diffX = _X - p.getX();

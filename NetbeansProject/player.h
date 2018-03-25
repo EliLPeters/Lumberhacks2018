@@ -48,6 +48,18 @@ public:
         _HP -= dam;
     }
     
+    bool isDead()
+    {
+        if(_HP <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
     void move(int ch)
     {
         switch(ch)

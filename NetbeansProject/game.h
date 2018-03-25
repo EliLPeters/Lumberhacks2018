@@ -12,6 +12,7 @@
 #include <ncurses.h>
 #include <vector>
 #include <string>
+#include <fstream>
 
 #include "map.h"
 #include "unit.h"
@@ -29,6 +30,8 @@ private:
     int roomcount;
     int score;
     player p;
+    
+    bool endgame;
     
     vector<monster> _monster_vector;
     
@@ -141,7 +144,8 @@ public:
         m.drawMap();
         spawnMonsters();
         int ch = getchar();
-        while(true)
+        endgame = false;
+        while(endgame == false)
         {
             switch(ch)
             {
@@ -216,7 +220,13 @@ public:
                     {
                         battle b = battle(_monster_vector[i], p);
                         b.battleSequence();
-                        score++;
+                        if(p.isDead())
+                        {
+                            terminate();
+                        }
+                        else{
+                            score++;
+                        }
                     }
                 }
                 
@@ -278,6 +288,18 @@ public:
     void terminate()
     {
         clear();
+        endgame = true;
+        exitHelper();
+    }
+    
+    void exitHelper()
+    {
+        ofstream out;
+        out.open("highscores.txt", ios::app);
+        
+        out << p.getName() << endl << score << endl << endl;
+        
+        out.close();
     }
     
     ~game()
