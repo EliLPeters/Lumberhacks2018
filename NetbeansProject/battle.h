@@ -122,40 +122,42 @@ public:
         
     }
     
-    void moveChar(int &chaX, int &chaY)
+    void moveChar(int &chaX, int &chaY, char &dir )
     {
         char guy = '@';
-        
         char ch = getch();
         
         if(ch == 'i')
             {
                 if(chaX > 1) {chaX--;}
-                   
-                
+                dir = 'u';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
             }
             else if(ch == 'k')
             {
                 if (chaX < LINES-2) {chaX++;}
-                
+                dir = 'd';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
             }
             else if(ch == 'l')
             {
                 if (chaY < COLS-2){chaY++;}
-                
+                dir = 'r';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
             }
             else if(ch == 'j')
             {
                 if (chaY > 1) {chaY--;}  
-                
+                dir = 'l';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
+            }
+            else if (ch == 'a')
+            {
+                playerAttack(dir);
             }
             else
             {
@@ -168,16 +170,30 @@ public:
     void battleSequence()
     {
         char ch;
+        int ctr = 0;
         
         while(true)
         {
+            ch = getch();
+            if(ch == 'q'){break;}
+            
             clear();
-            flipX = coinFlip();
-            flipY = coinFlip();
+            if(ctr > 20)
+            {
+                flipX = coinFlip();
+                flipY = coinFlip();
+            }
+            if(ctr > 30)
+            {
+                flipX = true;
+                flipY = true;
+                ctr = 0;
+            }
             drawBattleField();
             moveMonster(posX,posY,flipX,flipY);
-            moveChar(chaX,chaY);    
+            moveChar(chaX,chaY,dir);
             refresh();
+            ctr++;
         }
         
         return;
@@ -205,17 +221,79 @@ public:
         
     }
     
-    int randGen()
+    bool playerAttack(char dir)
     {
-       srand (time(NULL));
-       
-       int rnum = rand() % 20 + 1;
-       rnum = rand() % rnum + 1;
-       rnum = rand() % rnum + 1;
-       
-       return rnum;
+        int arrwx = chaY, arrwy = chaX;
+       // char atk = 'o';
+        
+        switch(dir)
+        {
+            case 'u':
+                while(arrwy > 0){
+                   usleep(50000);
+                    clear();
+                    drawBattleField();
+                    mvaddch(chaX,chaY,'@');
+                    mvaddch(posY,posX,'$');
+                    mvaddch(arrwy,arrwx,'|');
+                    arrwy--;
+                    refresh();
+                }
+                break;
+                
+            case 'd':
+                while(arrwy < LINES){
+                   usleep(50000);
+                    clear();
+                    drawBattleField();
+                    mvaddch(chaX,chaY,'@');
+                    mvaddch(posY,posX,'$');
+                    mvaddch(arrwy,arrwx,'|');
+                    arrwy++;
+                    refresh();
+                }
+                break;
+                
+            case 'l':
+                while(arrwx > 0){
+                   usleep(20000);
+                    clear();
+                    drawBattleField();
+                    mvaddch(chaX,chaY,'@');
+                    mvaddch(posY,posX,'$');
+                    mvaddch(arrwy,arrwx,'-');
+                    arrwx--;
+                    refresh();
+                }
+                break;
+                
+            case 'r':
+                while(arrwx < COLS){
+                   usleep(20000);
+                    clear();
+                    drawBattleField();
+                    mvaddch(chaX,chaY,'@');
+                    mvaddch(posY,posX,'$');
+                    mvaddch(arrwy,arrwx,'-');
+                    arrwx++;
+                    refresh();
+                }
+                break;
+        }
+        
+        return true;
+        
     }
     
+    int attackHelper()
+    {
+        
+    }
+    
+    int monsterAttack()
+    {
+        
+    }
     
 private:
     map m = map();
@@ -227,6 +305,7 @@ private:
     int chaY = 7;
     bool flipX = true;
     bool flipY = true;
+    char dir = 'u';
 };
 
 #endif /* BATTLE_H */
