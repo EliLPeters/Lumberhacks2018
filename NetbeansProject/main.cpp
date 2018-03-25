@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <ncurses.h>
 #include "game.h"
+#include "battle.h"
 
 using namespace std;
 
@@ -20,7 +21,6 @@ using namespace std;
 int main() {
 
     game g = game();
-  
   
     endwin();
         

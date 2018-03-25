@@ -10,6 +10,7 @@
 #define MONSTER_H
 
 #include <string>
+#include "unit.h"
 
 using namespace std;
 
