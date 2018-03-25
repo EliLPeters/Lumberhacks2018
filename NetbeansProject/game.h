@@ -25,12 +25,14 @@ class game
 private:
     bool _terminate = false;
     map m = map();
+    int roomcount;
     
     vector<monster> _monster_vector;
     
 public:
     game()
     {
+        srand(time(NULL));
         initscr();
         clear();
         noecho();
@@ -87,8 +89,11 @@ public:
     {
         player p = player("test");
         
+        roomcount = 1;
+        
         mvaddch(p.getY(), p.getX(), p.getSymbol());
         m.drawMap();
+        spawnMonsters();
         int ch = getchar();
         while(true)
         {
@@ -107,6 +112,8 @@ public:
                     {
                         m.newRoom('n');
                         p.relocate(p.getX(), 17);
+                        roomcount++;
+                        spawnMonsters();
                     }
                     break;
                 case 'j':
@@ -118,6 +125,8 @@ public:
                     {
                         m.newRoom('w');
                         p.relocate(51, p.getY());
+                        roomcount++;
+                        spawnMonsters();
                     }
                     break;
                 case 'k':
@@ -129,6 +138,8 @@ public:
                     {
                         m.newRoom('s');
                         p.relocate(p.getX(), 1);
+                        roomcount++;
+                        spawnMonsters();
                     }
                     break;
                 case 'l':
@@ -140,17 +151,66 @@ public:
                     {
                         m.newRoom('e');
                         p.relocate(1, p.getY());
+                        roomcount++;
+                        spawnMonsters();
                     }
                     break;
             }
             clear();
             mvaddch(p.getY(), p.getX(), p.getSymbol());
+            for(int i = 0; i < _monster_vector.size(); i++)
+            {
+                mvaddch(_monster_vector[i].getX(), _monster_vector[i].getY(), _monster_vector[i].getSymbol());
+            }
             m.drawMap();
             refresh();
             ch = getchar();
         }
         
         return;
+    }
+    
+    void spawnMonsters()
+    {
+        _monster_vector.clear();
+        _monster_vector.resize(0);
+        
+        int numOfEnemies = rand() % 3 + 1;
+        for (int i = 0; i < numOfEnemies; i++)
+        {
+            int randEnemy = rand() % 3 + 1;
+            
+            if (randEnemy == 1)
+            {
+                monster temp = wolf();
+                _monster_vector.push_back(temp);
+            }
+            else if (randEnemy == 2)
+            {
+                monster temp = troll();
+                _monster_vector.push_back(temp);
+            }
+            else if (randEnemy == 3)
+            {
+                monster temp = snake();
+                _monster_vector.push_back(temp);
+            }
+        }
+        
+        for(int i = 0; i < _monster_vector.size(); i++)
+        {
+            int monX = (rand() % 51);
+            int monY = (rand() % 17);
+            
+            while(m.isWall(monX, monY) || m.isDoor(monX, monY))
+            {
+                int monX = (rand() % 52);
+                int monY = (rand() % 19);
+            }
+            
+            _monster_vector[i].relocate(monX, monY);
+        }
+        
     }
     
     ~game()
