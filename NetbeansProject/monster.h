@@ -49,6 +49,10 @@ public:
         {
             diffY = 0 - diffY;
         }
+        if(diffX == 0 && diffY ==0)
+        {
+            return;
+        }
         if(diffY >= diffX)
         {
             if((_Y - p.getY()) > 0)
@@ -59,10 +63,6 @@ public:
             {
                 _Y++;
             }
-        }
-        else if(diffX == 0 && diffY ==0)
-        {
-            return;
         }
         else
         {
