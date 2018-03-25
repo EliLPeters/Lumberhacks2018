@@ -66,8 +66,9 @@ public:
     void moveMonster(int &posX, int &posY,bool &flipX, bool &flipY)
     {
         usleep(70000);
+        attron(COLOR_PAIR(4));
         mvaddch(posY,posX,mon->getSymbol());
-        
+        attron(COLOR_PAIR(1));
         //Side to side movement
         
         if (flipX == true)
@@ -135,6 +136,7 @@ public:
         if(atkCtr > 3)
         {
             plr->damage(mon->getAttack());
+            attron(COLOR_PAIR(5));
             mvaddch(chaX,chaY,'X');
             refresh();
             atkCtr = 0;
@@ -151,28 +153,36 @@ public:
             {
                 if(chaX > 1) {chaX -= 2;}
                 dir = 'u';
+                attron(COLOR_PAIR(3));
                 mvaddch(chaX,chaY,guy);
+                attron(COLOR_PAIR(1));
                 //m.drawMap();
             }
             else if(ch == 'k')
             {
                 if (chaX < LINES-2) {chaX += 2;}
                 dir = 'd';
+                attron(COLOR_PAIR(3));
                 mvaddch(chaX,chaY,guy);
+                attron(COLOR_PAIR(1));
                 //m.drawMap();
             }
             else if(ch == 'l')
             {
                 if (chaY < COLS-2){chaY += 2;}
                 dir = 'r';
+                attron(COLOR_PAIR(3));
                 mvaddch(chaX,chaY,guy);
+                attron(COLOR_PAIR(1));
                 //m.drawMap();
             }
             else if(ch == 'j')
             {
                 if (chaY > 1) {chaY-=2;}  
                 dir = 'l';
+                attron(COLOR_PAIR(3));
                 mvaddch(chaX,chaY,guy);
+                attron(COLOR_PAIR(1));
                 //m.drawMap();
             }
             else if (ch == 'a')
@@ -181,7 +191,9 @@ public:
             }
             else
             {
+                attron(COLOR_PAIR(3));
                 mvaddch(chaX,chaY,guy);
+                attron(COLOR_PAIR(1));
             }
         
     }
@@ -358,6 +370,7 @@ public:
             case 'u':
                 if(posX == prox && chaX > posY)
                 {
+                    attron(COLOR_PAIR(5));
                     mvaddch(posY,posX,'X');
                     mon->damage(plr->getAttack());
                 }
@@ -374,6 +387,7 @@ public:
             case 'l':
                 if(posY == prox && chaY > posX)
                 {
+                    attron(COLOR_PAIR(5));
                     mvaddch(posY,posX,'X');
                     mon->damage(plr->getAttack());
                 }
@@ -382,6 +396,7 @@ public:
             case 'r':
                 if(posY == prox && chaY < posX)
                 {
+                    attron(COLOR_PAIR(5));
                     mvaddch(posY,posX,'X');
                     mon->damage(plr->getAttack());
                 }
