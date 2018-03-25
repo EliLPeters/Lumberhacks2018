@@ -10,6 +10,8 @@
 #define MONSTER_H
 
 #include <string>
+
+#include "player.h"
 #include "unit.h"
 
 using namespace std;
@@ -33,6 +35,41 @@ public:
         else
         {
             return false;
+        }
+    }
+    void moveWorld(player& p)
+    {
+        int diffX = _X - p.getX();
+        if(diffX < 0)
+        {
+            diffX = 0 - diffX;
+        }
+        int diffY = _Y - p.getY();
+        if(diffY < 0)
+        {
+            diffY = 0 - diffY;
+        }
+        if(diffY >= diffX)
+        {
+            if((_Y - p.getY()) > 0)
+            {
+                _Y--;
+            }
+            else
+            {
+                _Y++;
+            }
+        }
+        else
+        {
+            if((_X - p.getX()) > 0)
+            {
+                _X--;
+            }
+            else
+            {
+                _X++;
+            }
         }
     }
     

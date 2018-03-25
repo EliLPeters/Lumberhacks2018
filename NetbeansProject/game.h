@@ -27,6 +27,8 @@ private:
     bool _terminate = false;
     map m = map();
     int roomcount;
+    int score;
+    player p;
     
     vector<monster> _monster_vector;
     
@@ -64,9 +66,7 @@ public:
             printw("  About");
             move(4,0);
             printw("  Quit");
-            move(3 ,0);
-            printw("Battle");
-            mvaddch(choice, 0, '>');
+            mvaddch((choice * 2), 0, '>');
             refresh();
             int ch = getch();
             if(ch == KEY_UP)
@@ -78,14 +78,10 @@ public:
             }
             else if(ch == KEY_DOWN)
             {
-                if(choice < 6)
+                if(choice < 2)
                 {
                     choice ++;
                 }
-            }
-            else if(ch == 'b')
-            {
-                choice = 3;
             }
             
             else if(ch == 10)
@@ -107,11 +103,22 @@ public:
         }
     }
     
+    void printInfo()
+    {
+        move(19,0);
+        printw("Name: ");
+        printw(p.getName().c_str());
+        printw("\tScore: ");
+        string temp = to_string(score);
+        printw(temp.c_str());
+    }
+    
     void play()
     {
-        player p = player("test");
+        p = player("test");
         
         roomcount = 1;
+        score = 0;
         
         mvaddch(p.getY(), p.getX(), p.getSymbol());
         m.drawMap();
@@ -177,23 +184,25 @@ public:
                         spawnMonsters();
                     }
                     break;
-            }
+            }            
             clear();
             mvaddch(p.getY(), p.getX(), p.getSymbol());
             for(int i = 0; i < _monster_vector.size(); i++)
             {
+                if(_monster_vector[i].isDead() == false)
+                {
+                    _monster_vector[i].moveWorld(p);
+                    mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
+                    move(0,0);
+                }
                 if(_monster_vector[i].getX() == p.getX() && _monster_vector[i].getY() == p.getY())
                 {
                     battle b = battle(_monster_vector[i], p);
                     b.battleSequence();
                 }
-                if(_monster_vector[i].isDead() == false)
-                {
-                    mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
-                    move(0,0);
-                }
             }
             m.drawMap();
+            printInfo();
             refresh();
             ch = getchar();
         }

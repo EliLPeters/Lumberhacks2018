@@ -9,6 +9,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "unit.h"
 #include "monster.h"
 
 using namespace std;
@@ -17,6 +18,15 @@ class player : public unit
 {
 public:
     // Constructor
+    player()
+    {
+        _symbol = '@';
+        _HP = 20;
+        _attack = 5;
+        _name = "test";
+        _X = 10;
+        _Y = 10;
+    }
     player(string sName)
     {
         _symbol = '@';
