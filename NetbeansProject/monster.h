@@ -60,6 +60,10 @@ public:
                 _Y++;
             }
         }
+        else if(diffX == 0 && diffY ==0)
+        {
+            return;
+        }
         else
         {
             if((_X - p.getX()) > 0)

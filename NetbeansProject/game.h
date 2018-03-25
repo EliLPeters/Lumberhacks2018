@@ -193,13 +193,13 @@ public:
                 {
                     _monster_vector[i].moveWorld(p);
                     mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
-                    move(0,0);
+                    if(_monster_vector[i].getX() == p.getX() && _monster_vector[i].getY() == p.getY())
+                    {
+                        battle b = battle(_monster_vector[i], p);
+                        score++;
+                    }
                 }
-                if(_monster_vector[i].getX() == p.getX() && _monster_vector[i].getY() == p.getY())
-                {
-                    battle b = battle(_monster_vector[i], p);
-                    b.battleSequence();
-                }
+                
             }
             m.drawMap();
             printInfo();
@@ -253,6 +253,11 @@ public:
             _monster_vector[i].relocate(monX, monY);
         }
         
+    }
+    
+    void terminate()
+    {
+        clear();
     }
     
     ~game()
