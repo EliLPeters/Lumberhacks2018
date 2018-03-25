@@ -40,6 +40,8 @@ public:
     {
         plr = playr;
         mon = mons;
+        
+        battleSequence();
     }
     
     void drawBattleField()
