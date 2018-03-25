@@ -31,6 +31,10 @@ class battle
 {
 public:
     
+    battle()
+    {
+        
+    }
 
     battle(monster mons, player playr)
     {
@@ -221,10 +225,9 @@ public:
         
     }
     
-    bool playerAttack(char dir)
+    int playerAttack(char dir)
     {
         int arrwx = chaY, arrwy = chaX;
-       // char atk = 'o';
         
         switch(dir)
         {
@@ -281,13 +284,34 @@ public:
                 break;
         }
         
+        if(dir == 'u' || dir == 'd')
+        {
+            doDamage(arrwy);
+        }
+        else
+        {
+            doDamage(arrwx);
+        }
+        
         return true;
         
     }
     
-    int attackHelper()
+    int doDamage(int prox)
     {
+        if (dir == 'u' || dir == 'd')
+        {
+            if (prox == posX)
+            {
+                printw("YAHITIT");
+            }
+            else
+            {
+                printw("YAMISSED");
+            }
+        }
         
+        return 0;
     }
     
     int monsterAttack()
@@ -297,7 +321,7 @@ public:
     
 private:
     map m = map();
-    player plr = player();
+    player plr = player("bob");
     monster mon = monster();
     int posX = 5;
     int posY = 5;

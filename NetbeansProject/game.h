@@ -17,6 +17,7 @@
 #include "unit.h"
 #include "monster.h"
 #include "player.h"
+#include "battle.h"
 
 using namespace std;
 
@@ -36,6 +37,7 @@ public:
         noecho();
         cbreak();
         keypad(stdscr, TRUE);
+        nodelay(stdscr, TRUE);
         curs_set(0);
         string welcome = "Welcome! press any key to continue!";
         move(0,((COLS / 2) - (welcome.length() / 2)));
@@ -51,6 +53,7 @@ public:
     
     void mainMenu()
     {
+        battle b = battle();
         int choice = 0;
         while(_terminate == false)
         {
@@ -58,6 +61,8 @@ public:
             printw("  Play");
             move(2,0);
             printw("  Quit");
+            move(3,0);
+            printw("Battle");
             mvaddch(choice, 0, '>');
             refresh();
             int ch = getch();
@@ -69,6 +74,11 @@ public:
             {
                 choice = 2;
             }
+            else if(ch == 'b')
+            {
+                choice = 3;
+            }
+            
             else if(ch == 10)
             {
                 switch(choice)
@@ -78,6 +88,9 @@ public:
                     case 2:
                         _terminate = true;
                         return;
+                    case 3:
+                        b.battleSequence();
+                        break;
                 }
             }
         }
