@@ -223,7 +223,9 @@ public:
         {
             clear();
             bgHelper();
-            printw("Aw yeah, it super dead");
+            move(10,10);
+            usleep(70000);
+            printw("Heck ya, you killed it!");
             getch();
             refresh();
         }
@@ -231,6 +233,8 @@ public:
         {
             clear();
             bgHelper();
+            move(10,10);
+            usleep(70000);
             printw("HA! Whata Loser!");
             getch();
             refresh();
