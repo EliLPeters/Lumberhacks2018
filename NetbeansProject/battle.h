@@ -221,13 +221,15 @@ public:
         if (mon->getHP() <= 0)
         {
             clear();
-            printw("HELLS YA YA WON YA SONOFAITCH");
+            printw("Aw yeah, it super dead");
+            getch();
             refresh();
         }
         if (plr->getHP() <= 0)
         {
             clear();
-            printw("YA DIED YA STUPID BITCH WAHAHAHAHA");
+            printw("HA! Whata Loser!");
+            getch();
             refresh();
         }
         
