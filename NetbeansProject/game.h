@@ -47,6 +47,8 @@ public:
         nodelay(stdscr, FALSE);
         start_color();
         init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(2, COLOR_BLACK, COLOR_WHITE);
+        init_pair(3, COLOR_GREEN, COLOR_BLUE);
         curs_set(0);
         //refresh();
         while(_terminate == false)
@@ -71,7 +73,7 @@ public:
             move(0,0);
             printw("  Play");
             move(2,0);
-            printw("  About");
+            printw("  High Scores");
             move(4,0);
             printw("  Quit");
             mvaddch((choice * 2), 0, '>');
@@ -97,7 +99,12 @@ public:
                 switch(choice)
                 {
                     case 0:
+                        createPlayer();
                         play();
+                        break;
+                    case 1:
+                        getHigh();
+                        break;
                     case 2:
                         _terminate = true;
                         return;
@@ -113,12 +120,16 @@ public:
     
     void printInfo()
     {
+        
+        attron(COLOR_PAIR(2));
         move(19,0);
         printw("Name: ");
         printw(p.getName().c_str());
         printw("\tScore: ");
         string temp = to_string(score);
         printw(temp.c_str());
+        attron(COLOR_PAIR(1));
+        refresh();
     }
     
     void bgHelper()
@@ -135,14 +146,13 @@ public:
     
     void play()
     {
-        p = player("test");
-        
         roomcount = 1;
         score = 0;
         
         mvaddch(p.getY(), p.getX(), p.getSymbol());
         m.drawMap();
         spawnMonsters();
+        refresh();
         int ch = getchar();
         endgame = false;
         while(endgame == false)
@@ -153,6 +163,7 @@ public:
                     clear();
                     bgHelper();
                     refresh();
+                    terminate();
                     return;
                 case 'i':
                     if(!m.isWall(p.getX(), (p.getY() - 1)) && !m.isDoor(p.getX(), (p.getY() - 1)))
@@ -293,9 +304,70 @@ public:
         exitHelper();
     }
     
+    void createPlayer()
+    {
+        clear();
+        bgHelper();
+        move(0,0);
+        printw("Enter your name: ");
+        refresh();
+        int ch = 0;
+        string temp;
+        while(ch != 10 && ch != 13 && ch != KEY_ENTER)
+        {
+            ch = getchar();
+            
+            if(ch != 10 && ch != 13 && ch != KEY_ENTER)
+            {
+                char c = ch;
+                temp += c;
+                addch(ch);
+                refresh();
+            }
+        }
+        
+        p = player(temp);
+    }
+    
     void getHigh()
     {
+        ifstream in;
+        in.open("highscores.txt");
         
+        string hName = "";
+        int hScore = 0;
+        
+        if(in.is_open() && in.good())
+        {
+            getline(in, hName);
+        }
+        while(in.is_open() && in.good())
+        {
+            string tempName;
+            getline(in, tempName);
+            string tempScore;
+            getline(in, tempScore);
+            if(stoi(tempScore) > hScore)
+            {
+                hName = tempName;
+                hScore = stoi(tempScore);
+            }
+        }
+        
+        clear();
+        bgHelper();
+        move(0,0);
+        printw("High Score: ");
+        printw(hName.c_str());
+        string temp = to_string(hScore);
+        move(1,0);
+        printw(temp.c_str());
+        printw(" points");
+        getch();
+        clear();
+        bgHelper();
+        
+        in.close();
     }
     
     void exitHelper()
