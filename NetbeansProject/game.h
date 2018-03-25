@@ -50,6 +50,7 @@ public:
         init_pair(2, COLOR_BLACK, COLOR_WHITE);
         init_pair(3, COLOR_GREEN, COLOR_BLACK);
         init_pair(4, COLOR_RED, COLOR_BLACK);
+        init_pair(5, COLOR_MAGENTA, COLOR_BLACK);
         curs_set(0);
         //refresh();
         while(_terminate == false)
@@ -129,6 +130,9 @@ public:
         printw(p.getName().c_str());
         printw("\tScore: ");
         string temp = to_string(score);
+        printw(temp.c_str());
+        printw("\tHP: ")
+        temp = to_string(player.getHP());
         printw(temp.c_str());
         attron(COLOR_PAIR(1));
         refresh();
