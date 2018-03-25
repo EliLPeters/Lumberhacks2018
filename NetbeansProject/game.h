@@ -220,6 +220,7 @@ public:
                     {
                         battle b = battle(_monster_vector[i], p);
                         b.battleSequence();
+                        nodelay(stdscr, FALSE);
                         if(p.isDead())
                         {
                             terminate();
