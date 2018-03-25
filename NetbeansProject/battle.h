@@ -225,19 +225,29 @@ public:
         {
             clear();
             bgHelper();
-            move(10,10);
-            printw("Heck ya, you killed it!");
-            usleep(100000);
+            move(10,25);
+            
+            attron(A_BLINK);
+            printw("Heck ya, you killed it!");            
             refresh();
+            attroff(A_BLINK);
+            usleep(3000000);
+            getch();
+            
         }
         if (plr->getHP() <= 0)
         {
             clear();
             bgHelper();
-            move(10,10);
-            printw("HA! Whata Loser!");
+            move(10,25);
             
+            attron(A_BLINK);
+            printw("HA! What a Loser!!");            
             refresh();
+            attroff(A_BLINK);
+            usleep(3000000);
+            getch();
+            
         }
         
         return;
@@ -300,7 +310,7 @@ public:
                 
             case 'l':
                 while(arrwx > 0){
-                   usleep(20000);
+                   usleep(10000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -314,7 +324,7 @@ public:
                 
             case 'r':
                 while(arrwx < COLS){
-                   usleep(20000);
+                   usleep(10000);
                     clear();
                     drawBattleField();
                     displayScore();
