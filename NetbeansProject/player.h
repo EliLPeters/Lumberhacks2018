@@ -34,7 +34,7 @@ public:
     void attack(monster& enemy)
     {
         enemy.changeHP(0);
-        changeHP(enemy.damage());
+        changeHP(enemy.getDamage());
     }
     
     void move(int ch)

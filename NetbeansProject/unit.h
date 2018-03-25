@@ -18,7 +18,7 @@ class unit
 protected:
     
     int _HP = 0;
-    int _DEX = 0;
+    int _damage = 0;
     int _STR = 0;
     
     int _X = 0;
@@ -61,9 +61,9 @@ public:
         
     }
     
-    int getDEX()
+    int getDamage()
     {
-        return _DEX;
+        return _damage;
     }
     
     int getSTR()
@@ -76,19 +76,9 @@ public:
         return _X;
     }
     
-    int setX(int x)
-    {
-        _X = x;
-    }
-    
     int getY()
     {
         return _Y;
-    }
-    
-    int setY(int y)
-    {
-        _Y = y;
     }
     
     char getSymbol()
@@ -99,4 +89,3 @@ public:
 
 
 #endif /* UNIT_H */
-
