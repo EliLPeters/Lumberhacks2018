@@ -42,13 +42,10 @@ public:
         cbreak();
         keypad(stdscr, TRUE);
         nodelay(stdscr, TRUE);
+        start_color();
+        init_pair(1, COLOR_WHITE, COLOR_BLUE);
         curs_set(0);
-        string welcome = "Welcome! press any key to continue!";
-        move(0,((COLS / 2) - (welcome.length() / 2)));
-        printw(welcome.c_str());
-        refresh();
-        getch();
-        clear();
+        //refresh();
         while(_terminate == false)
         {
             mainMenu();
@@ -58,6 +55,14 @@ public:
     void mainMenu()
     {
         int choice = 0;
+        string welcome = "Welcome! press any key to continue!";
+        move(0,((COLS / 2) - (welcome.length() / 2)));
+        attron(COLOR_PAIR(1));
+        printw(welcome.c_str());
+        refresh();
+        getch();
+        clear();
+        bgHelper();
         while(_terminate == false)
         {
             move(0,0);
@@ -113,6 +118,18 @@ public:
         printw(temp.c_str());
     }
     
+    void bgHelper()
+    {
+        attron(COLOR_PAIR(1));
+        for(int i = 0; i < LINES; i++)
+        {
+            for(int j = 0; j < COLS; j++)
+            {
+                mvaddch(i,j,' ');
+            }
+        }
+    }
+    
     void play()
     {
         p = player("test");
@@ -130,6 +147,7 @@ public:
             {
                 case 'x':
                     clear();
+                    bgHelper();
                     refresh();
                     return;
                 case 'i':
@@ -186,6 +204,7 @@ public:
                     break;
             }            
             clear();
+            bgHelper();
             mvaddch(p.getY(), p.getX(), p.getSymbol());
             for(int i = 0; i < _monster_vector.size(); i++)
             {
