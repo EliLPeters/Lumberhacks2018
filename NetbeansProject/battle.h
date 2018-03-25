@@ -176,7 +176,7 @@ public:
         char ch;
         int ctr = 0;
         
-        while(true)
+        while(plr.getHP() > 0 && mon.getHP() > 0)
         {
             ch = getch();
             if(ch == 'q'){break;}
@@ -193,11 +193,19 @@ public:
                 flipY = true;
                 ctr = 0;
             }
+            posX = 5;
+            posY = 5;
             drawBattleField();
             moveMonster(posX,posY,flipX,flipY);
             moveChar(chaX,chaY,dir);
             refresh();
             ctr++;
+        }
+        
+        if (mon.getHP() <= 0)
+        {
+            clear();
+            printw("HELLS YA YA WON YA SONOFAITCH");
         }
         
         return;
@@ -225,7 +233,7 @@ public:
         
     }
     
-    int playerAttack(char dir)
+    void playerAttack(char dir)
     {
         int arrwx = chaY, arrwy = chaX;
         
@@ -286,32 +294,59 @@ public:
         
         if(dir == 'u' || dir == 'd')
         {
-            doDamage(arrwy);
+            doDamage(arrwx);
         }
         else
         {
-            doDamage(arrwx);
+            doDamage(arrwy);
         }
         
-        return true;
+        return;
         
     }
     
-    int doDamage(int prox)
+    void doDamage(int prox)
     {
-        if (dir == 'u' || dir == 'd')
+        switch(dir)
         {
-            if (prox == posX)
-            {
-                printw("YAHITIT");
-            }
-            else
-            {
-                printw("YAMISSED");
-            }
+            case 'u':
+                if(posX == prox && chaX > posY)
+                {
+                    mvaddch(posY,posX,'X');
+                    mon.damage(plr.getAttack());
+                }
+                break;
+                
+            case 'd':
+                if(posX == prox && chaX < posY)
+                {
+                    mvaddch(posY,posX,'X');
+                    mon.damage(plr.getAttack());
+                }
+                break;
+                
+            case 'l':
+                if(posY == prox && chaY > posX)
+                {
+                    mvaddch(posY,posX,'X');
+                    mon.damage(plr.getAttack());
+                }
+                break;
+                
+            case 'r':
+                if(posY == prox && chaY < posX)
+                {
+                    mvaddch(posY,posX,'X');
+                    mon.damage(plr.getAttack());
+                }
+                break;
+                
+            default:
+                break;
+                
         }
         
-        return 0;
+        return;
     }
     
     int monsterAttack()
@@ -322,7 +357,7 @@ public:
 private:
     map m = map();
     player plr = player("bob");
-    monster mon = monster();
+    monster mon = wolf();
     int posX = 5;
     int posY = 5;
     int chaX = 5;

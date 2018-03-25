@@ -116,7 +116,7 @@ public:
     wolf()
     {
         _HP = 25;
-        _damage = 10;
+        _attack = 10;
         _symbol = 'W';
         _name = "Wolf";
 
@@ -129,7 +129,7 @@ public:
     troll()
     {
         _HP = 15;
-        _damage = 5;
+        _attack = 5;
         _symbol = 'T';
         _name = "Troll";
     }
@@ -142,7 +142,7 @@ public:
     snake()
     {
         _HP = 20;
-        _damage = 20;
+        _attack = 20;
         _symbol = 'S';
         _name = "Snake";
 
