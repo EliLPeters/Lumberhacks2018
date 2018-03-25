@@ -6,7 +6,9 @@
 
 /* 
  * File:   battle.h
- * Author: melanos
+ * Author: Eli Peters 
+ *          John Mackin
+ *          David Shapiro
  *
  * Created on March 24, 2018, 11:06 AM
  */
@@ -409,7 +411,7 @@ public:
         
         return;
     }
-    
+//    
     void displayScore()
     {
         string ps = plr->getName();

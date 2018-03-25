@@ -1,6 +1,8 @@
 /* 
  * File:   main.cpp
- * Authors: Eli Peters <ADD YOUR NAMES>
+ * Authors: Eli Peters 
+ *          John Mackin
+ *          David Shapiro
  * Project: Lumberhacks 2018 entry
  *
  * Created on March 23, 2018, 7:01 PM

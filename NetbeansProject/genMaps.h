@@ -6,7 +6,9 @@
 
 /* 
  * File:   genMaps.h
- * Author: david
+ * Author: Eli Peters 
+ *          John Mackin
+ *          David Shapiro
  *
  * Created on March 24, 2018, 6:25 PM
  */
