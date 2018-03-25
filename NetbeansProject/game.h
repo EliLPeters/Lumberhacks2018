@@ -131,8 +131,8 @@ public:
         printw("\tScore: ");
         string temp = to_string(score);
         printw(temp.c_str());
-        printw("\tHP: ")
-        temp = to_string(player.getHP());
+        printw("\tHP: ");
+        temp = to_string(p.getHP());
         printw(temp.c_str());
         attron(COLOR_PAIR(1));
         refresh();
@@ -180,7 +180,6 @@ public:
                     {
                         m.newRoom('n');
                         p.relocate(p.getX(), 17);
-                        roomcount++;
                         spawnMonsters();
                     }
                     break;
@@ -193,7 +192,6 @@ public:
                     {
                         m.newRoom('w');
                         p.relocate(51, p.getY());
-                        roomcount++;
                         spawnMonsters();
                     }
                     break;
@@ -206,7 +204,6 @@ public:
                     {
                         m.newRoom('s');
                         p.relocate(p.getX(), 1);
-                        roomcount++;
                         spawnMonsters();
                     }
                     break;
@@ -219,7 +216,6 @@ public:
                     {
                         m.newRoom('e');
                         p.relocate(1, p.getY());
-                        roomcount++;
                         spawnMonsters();
                     }
                     break;
@@ -229,10 +225,13 @@ public:
             attron(COLOR_PAIR(3));
             mvaddch(p.getY(), p.getX(), p.getSymbol());
             attron(COLOR_PAIR(1));
+            int live = 0;
+            bool killed = false;
             for(int i = 0; i < _monster_vector.size(); i++)
             {
                 if(_monster_vector[i].isDead() == false)
                 {
+                    live++;
                     _monster_vector[i].moveWorld(p);
                     attron(COLOR_PAIR(4));
                     mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
@@ -247,11 +246,17 @@ public:
                             terminate();
                         }
                         else{
+                            killed == true;
                             score++;
+                            live--;
                         }
                     }
                 }
                 
+            }
+            if(live == 0 && killed == true)
+            {
+                roomcount++;
             }
             m.drawMap();
             printInfo();
@@ -347,6 +352,8 @@ public:
         string hName = "";
         int hScore = 0;
         
+        string hRoom = "";
+        
         if(in.is_open() && in.good())
         {
             getline(in, hName);
@@ -357,10 +364,13 @@ public:
             getline(in, tempName);
             string tempScore;
             getline(in, tempScore);
+            string tempRoom;
+            getline(in, tempRoom);
             if(stoi(tempScore) > hScore)
             {
                 hName = tempName;
                 hScore = stoi(tempScore);
+                hRoom = tempRoom;
             }
         }
         
@@ -373,6 +383,9 @@ public:
         move(1,0);
         printw(temp.c_str());
         printw(" points");
+        move(2,0);
+        printw(hRoom.c_str());
+        printw(" rooms cleared");
         getch();
         clear();
         bgHelper();
@@ -400,7 +413,7 @@ public:
         ofstream out;
         out.open("highscores.txt", ios::app);
         
-        out << endl << p.getName() << endl << score;
+        out << endl << p.getName() << endl << score << endl << roomcount;
         
         out.close();
     }
