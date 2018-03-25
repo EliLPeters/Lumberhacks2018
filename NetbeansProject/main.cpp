@@ -20,8 +20,6 @@ using namespace std;
 int main() {
 
     game g = game();
-    g.launch();
-    g.play();
   
   
     endwin();

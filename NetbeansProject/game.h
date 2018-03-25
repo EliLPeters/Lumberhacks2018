@@ -11,6 +11,7 @@
 
 #include <ncurses.h>
 #include <vector>
+#include <string>
 
 #include "map.h"
 #include "unit.h"
@@ -30,117 +31,119 @@ private:
 public:
     game()
     {
-        void launch();
-        //while(_terminate == false)
-        //{
-            mainMenu();
-            //if(_terminate == false)
-            //{
-                void play2();
-            //{
-        //}
-    }
-    
-    void hello()
-    {
-        
-    }
-    
-    void launch()
-    {
-        
         initscr();
         clear();
         noecho();
         cbreak();
         keypad(stdscr, TRUE);
         curs_set(0);
+        string welcome = "Welcome! press any key to continue!";
+        move(0,((COLS / 2) - (welcome.length() / 2)));
+        printw(welcome.c_str());
+        refresh();
         getch();
         clear();
+        while(_terminate == false)
+        {
+            mainMenu();
+        }
     }
     
     void mainMenu()
     {
-        // TODO: fill in, give a way to set _terminate to true
+        int choice = 0;
+        while(_terminate == false)
+        {
+            move(0,0);
+            printw("  Play");
+            move(2,0);
+            printw("  Quit");
+            mvaddch(choice, 0, '>');
+            refresh();
+            int ch = getch();
+            if(ch == KEY_UP)
+            {
+                choice = 0;
+            }
+            else if(ch == KEY_DOWN)
+            {
+                choice = 2;
+            }
+            else if(ch == 10)
+            {
+                switch(choice)
+                {
+                    case 0:
+                        play();
+                    case 2:
+                        _terminate = true;
+                        return;
+                }
+            }
+        }
     }
     
     void play()
     {
-        char ch;
-        int row = 10;
-        int col = 10;
-        char guy = '@';
-        mvaddch(row,col,guy);
-        
-        while(true)
-        {
-            ch = getch();
-            
-            if(ch == 'q')
-            {
-                clear();
-                break;
-            }
-            else if(ch == 'i')
-            {
-                clear();
-                if(row > 1) {row--;}
-                   
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else if(ch == 'k')
-            {
-                clear();
-                if (row < LINES-2) {row++;}
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else if(ch == 'l')
-            {
-                clear();
-                if (col < COLS-2){col++;}
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else if(ch == 'j')
-            {
-                clear();
-                if (col > 1) {col--;}  
-                
-                mvaddch(row,col,guy);
-                //m.drawMap();
-            }
-            else
-            {
-                
-            }
-            m.drawMap();
-            refresh();
-        }
-        
-        return;
-    }
-    
-    void play2()
-    {
         player p = player("test");
         
-        mvaddch(p.getX(), p.getY(), p.getSymbol());
+        mvaddch(p.getY(), p.getX(), p.getSymbol());
         m.drawMap();
+        int ch = getchar();
         while(true)
         {
-            char ch = getchar();
-            
-            p.move(ch);
-            
-            mvaddch(p.getX(), p.getY(), p.getSymbol());
-            
+            switch(ch)
+            {
+                case 'x':
+                    clear();
+                    refresh();
+                    return;
+                case 'i':
+                    if(!m.isWall(p.getX(), (p.getY() - 1)) && !m.isDoor(p.getX(), (p.getY() - 1)))
+                    {
+                        p.move(ch);
+                    }
+                    else if(m.isDoor(p.getX(), (p.getY() - 1)))
+                    {
+                        
+                    }
+                    break;
+                case 'j':
+                    if(!m.isWall((p.getX() - 1), p.getY()) && !m.isDoor((p.getX() - 1), p.getY()))
+                    {
+                        p.move(ch);
+                    }
+                    else if(m.isDoor((p.getX() - 1), p.getY()))
+                    {
+                        
+                    }
+                    break;
+                case 'k':
+                    if(!m.isWall(p.getX(), (p.getY() + 1)) && !m.isDoor(p.getX(), (p.getY() + 1)))
+                    {
+                        p.move(ch);
+                    }
+                    else if(m.isDoor(p.getX(), (p.getY() + 1)))
+                    {
+                        
+                    }
+                    break;
+                case 'l':
+                    if(!m.isWall((p.getX() + 1), p.getY()) && !m.isDoor((p.getX() + 1), p.getY()))
+                    {
+                        p.move(ch);
+                    }
+                    else if(m.isDoor((p.getX() + 1), p.getY()))
+                    {
+                        
+                    }
+                    break;
+            }
+            clear();
+            mvaddch(p.getY(), p.getX(), p.getSymbol());
             m.drawMap();
             refresh();
+            ch = getchar();
         }
         
         return;
