@@ -190,6 +190,7 @@ public:
     {
         char ch;
         int ctr = 0;
+        srand(time(NULL));
         
         while(plr->getHP() > 0 && mon->getHP() > 0)
         {
@@ -197,12 +198,12 @@ public:
             if(ch == 'q'){break;}
             
             clear();
-            if(ctr > 20)
+            if(ctr > 50)
             {
                 flipX = coinFlip();
                 flipY = coinFlip();
             }
-            if(ctr > 30)
+            if(ctr > 80)
             {
                 flipX = true;
                 flipY = true;
@@ -235,7 +236,6 @@ public:
     
     bool coinFlip()
     {
-        srand(time(NULL));
         int flipTimes = rand() % 20;
         int coinFlip;
         
@@ -386,18 +386,17 @@ public:
         move(1,5);
         printw(ps.c_str());
         move(1,20);
-        printw(es.c_str());
-        
+        printw(es.c_str());    
     }
     
 private:
     map m = map();
     player* plr;
     monster* mon;
-    int posX = 5;
-    int posY = 5;
-    int chaX = 5;
-    int chaY = 7;
+    int posX = 0;
+    int posY = 10;
+    int chaX = 10;
+    int chaY = 60;
     bool flipX = true;
     bool flipY = true;
     int atkCtr = 0;
