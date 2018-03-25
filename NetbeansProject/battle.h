@@ -266,6 +266,7 @@ public:
                    usleep(50000);
                     clear();
                     drawBattleField();
+                    displayScore();
                     mvaddch(chaX,chaY,'@');
                     mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'|');
@@ -279,6 +280,7 @@ public:
                    usleep(50000);
                     clear();
                     drawBattleField();
+                    displayScore();
                     mvaddch(chaX,chaY,'@');
                     mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'|');
@@ -292,6 +294,7 @@ public:
                    usleep(20000);
                     clear();
                     drawBattleField();
+                    displayScore();
                     mvaddch(chaX,chaY,'@');
                     mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'-');
@@ -305,6 +308,7 @@ public:
                    usleep(20000);
                     clear();
                     drawBattleField();
+                    displayScore();
                     mvaddch(chaX,chaY,'@');
                     mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'-');
@@ -379,8 +383,11 @@ public:
         string es = mon->getName();
         es += ": ";
         es += to_string(mon->getHP());
-        move(2,5);
+        move(1,5);
         printw(ps.c_str());
+        move(1,20);
+        printw(es.c_str());
+        
     }
     
 private:
