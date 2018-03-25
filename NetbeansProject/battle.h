@@ -373,16 +373,15 @@ public:
     
     void displayScore()
     {
-        string ps = to_string(plr->getHP());
-        
-        
-        
-        move(0,COLS/2);
+        string ps = plr->getName();
+        ps += ": ";
+        ps += to_string(plr->getHP());
+        string es = mon->getName();
+        es += ": ";
+        es += to_string(mon->getHP());
+        move(2,5);
         printw(ps.c_str());
     }
-    
-    
-    
     
 private:
     map m = map();
