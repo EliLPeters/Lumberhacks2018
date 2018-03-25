@@ -43,12 +43,6 @@ public:
         
     }
     
-    void attack(monster& enemy)
-    {
-        enemy.changeHP(0);
-        //changeHP(enemy.getDamage());
-    }
-    
     void damage(int dam)
     {
         _HP -= dam;
