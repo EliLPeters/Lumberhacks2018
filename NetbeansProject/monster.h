@@ -17,6 +17,12 @@ class monster : public unit
 {
 public:
     
+    void relocate(int x, int y)
+    {
+        _X = x;
+        _Y = y;
+    }
+    
     monster()
     {
         
