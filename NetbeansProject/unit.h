@@ -18,7 +18,7 @@ class unit
 protected:
     
     int _HP = 0;
-    int _damage = 0;
+    int _attack = 0;
     int _STR = 0;
     
     int _X = 0;
@@ -61,9 +61,9 @@ public:
         
     }
     
-    int getDamage()
+    int getAttack()
     {
-        return _damage;
+        return _attack;
     }
     
     int getSTR()

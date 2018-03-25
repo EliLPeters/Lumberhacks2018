@@ -20,6 +20,8 @@ public:
     player(string sName)
     {
         _symbol = '@';
+        _HP = 20;
+        _attack = 5;
         _name = sName;
         _X = 10;
         _Y = 10;
