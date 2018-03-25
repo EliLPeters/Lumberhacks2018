@@ -44,7 +44,7 @@ public:
         noecho();
         cbreak();
         keypad(stdscr, TRUE);
-        nodelay(stdscr, TRUE);
+        nodelay(stdscr, FALSE);
         start_color();
         init_pair(1, COLOR_WHITE, COLOR_BLUE);
         curs_set(0);
@@ -292,12 +292,17 @@ public:
         exitHelper();
     }
     
+    void getHigh()
+    {
+        
+    }
+    
     void exitHelper()
     {
         ofstream out;
         out.open("highscores.txt", ios::app);
         
-        out << p.getName() << endl << score << endl << endl;
+        out << endl << p.getName() << endl << score;
         
         out.close();
     }
