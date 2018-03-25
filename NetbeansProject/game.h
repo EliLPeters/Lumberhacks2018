@@ -62,19 +62,27 @@ public:
             move(0,0);
             printw("  Play");
             move(2,0);
+            printw("  About");
+            move(4,0);
             printw("  Quit");
-            move(3,0);
+            move(3 ,0);
             printw("Battle");
             mvaddch(choice, 0, '>');
             refresh();
             int ch = getch();
             if(ch == KEY_UP)
             {
-                choice = 0;
+                if(choice > 0)
+                {
+                    choice--;
+                }
             }
             else if(ch == KEY_DOWN)
             {
-                choice = 2;
+                if(choice < 6)
+                {
+                    choice ++;
+                }
             }
             else if(ch == 'b')
             {
@@ -173,7 +181,10 @@ public:
             mvaddch(p.getY(), p.getX(), p.getSymbol());
             for(int i = 0; i < _monster_vector.size(); i++)
             {
-                mvaddch(_monster_vector[i].getX(), _monster_vector[i].getY(), _monster_vector[i].getSymbol());
+                if(_monster_vector[i].isDead() == false)
+                {
+                    mvaddch(_monster_vector[i].getX(), _monster_vector[i].getY(), _monster_vector[i].getSymbol());
+                }
             }
             m.drawMap();
             refresh();
@@ -193,20 +204,20 @@ public:
         {
             int randEnemy = rand() % 3 + 1;
             
-            if (randEnemy == 1)
+            if(randEnemy == 1)
             {
-                monster temp = wolf();
-                _monster_vector.push_back(temp);
+                monster temp1 = wolf();
+                _monster_vector.push_back(temp1);
             }
-            else if (randEnemy == 2)
+            else if(randEnemy == 1)
             {
-                monster temp = troll();
-                _monster_vector.push_back(temp);
+                monster temp2 = troll();
+                _monster_vector.push_back(temp2);
             }
-            else if (randEnemy == 3)
+            else if(randEnemy == 1)
             {
-                monster temp = snake();
-                _monster_vector.push_back(temp);
+                monster temp3 = snake();
+                _monster_vector.push_back(temp3);
             }
         }
         
@@ -215,10 +226,14 @@ public:
             int monX = (rand() % 51);
             int monY = (rand() % 17);
             
+            _monster_vector[i].relocate(monX, monY);
+            
             while(m.isWall(monX, monY) || m.isDoor(monX, monY))
             {
-                int monX = (rand() % 52);
-                int monY = (rand() % 19);
+                monX = (rand() % 51);
+                monY = (rand() % 17);
+                
+                
             }
             
             _monster_vector[i].relocate(monX, monY);
