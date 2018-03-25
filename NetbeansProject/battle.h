@@ -188,6 +188,8 @@ public:
     
     void battleSequence()
     {
+        
+        nodelay(stdscr, TRUE);
         char ch;
         int ctr = 0;
         srand(time(NULL));
@@ -225,9 +227,7 @@ public:
             bgHelper();
             move(10,10);
             printw("Heck ya, you killed it!");
-            getch();
-            getch();
-            getch();
+            usleep(100000);
             refresh();
         }
         if (plr->getHP() <= 0)
@@ -236,9 +236,7 @@ public:
             bgHelper();
             move(10,10);
             printw("HA! Whata Loser!");
-            getch();
-            getch();
-            getch();
+            
             refresh();
         }
         
@@ -274,7 +272,7 @@ public:
         {
             case 'u':
                 while(arrwy > 0){
-                   usleep(20000);
+                   usleep(30000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -288,7 +286,7 @@ public:
                 
             case 'd':
                 while(arrwy < LINES){
-                   usleep(20000);
+                   usleep(30000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -302,7 +300,7 @@ public:
                 
             case 'l':
                 while(arrwx > 0){
-                   usleep(10000);
+                   usleep(20000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -316,7 +314,7 @@ public:
                 
             case 'r':
                 while(arrwx < COLS){
-                   usleep(10000);
+                   usleep(20000);
                     clear();
                     drawBattleField();
                     displayScore();

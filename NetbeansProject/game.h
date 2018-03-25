@@ -44,7 +44,7 @@ public:
         noecho();
         cbreak();
         keypad(stdscr, TRUE);
-        nodelay(stdscr, TRUE);
+        nodelay(stdscr, FALSE);
         start_color();
         init_pair(1, COLOR_WHITE, COLOR_BLUE);
         curs_set(0);
@@ -220,6 +220,7 @@ public:
                     {
                         battle b = battle(_monster_vector[i], p);
                         b.battleSequence();
+                        nodelay(stdscr, FALSE);
                         if(p.isDead())
                         {
                             terminate();
