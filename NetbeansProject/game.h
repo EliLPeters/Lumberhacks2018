@@ -196,6 +196,7 @@ public:
                     if(_monster_vector[i].getX() == p.getX() && _monster_vector[i].getY() == p.getY())
                     {
                         battle b = battle(_monster_vector[i], p);
+                        b.battleSequence();
                         score++;
                     }
                 }
