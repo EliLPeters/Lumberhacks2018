@@ -20,6 +20,7 @@
 #include <stdio.h>      /* printf, scanf, puts, NULL */
 #include <stdlib.h>     /* srand, rand */
 #include <time.h>   
+#include <string>
 #include "player.h"
 #include "monster.h"
 #include "map.h"
@@ -31,18 +32,12 @@ class battle
 {
 public:
     
-    battle()
-    {
-        
-    }
-
     battle(monster &mons, player &playr)
     {
-        plr = playr;
-        mon = mons;
-        
-        battleSequence();
+        plr = &playr;
+        mon = &mons;
     }
+
     
     void drawBattleField()
     {
@@ -70,8 +65,8 @@ public:
     
     void moveMonster(int &posX, int &posY,bool &flipX, bool &flipY)
     {
-        usleep(100000);
-        mvaddch(posY,posX,mon.getSymbol());
+        usleep(70000);
+        mvaddch(posY,posX,mon->getSymbol());
         
         //Side to side movement
         
@@ -139,7 +134,7 @@ public:
         
         if(atkCtr > 3)
         {
-            plr.damage(mon.getAttack());
+            plr->damage(mon->getAttack());
             mvaddch(chaX,chaY,'X');
             refresh();
             atkCtr = 0;
@@ -196,7 +191,7 @@ public:
         char ch;
         int ctr = 0;
         
-        while(plr.getHP() > 0 && mon.getHP() > 0)
+        while(plr->getHP() > 0 && mon->getHP() > 0)
         {
             ch = getch();
             if(ch == 'q'){break;}
@@ -213,22 +208,22 @@ public:
                 flipY = true;
                 ctr = 0;
             }
-            posX = 20;
-            posY = 20;
+            
             drawBattleField();
+            displayScore();
             moveMonster(posX,posY,flipX,flipY);
             moveChar(chaX,chaY,dir);
             refresh();
             ctr++;
         }
         
-        if (mon.getHP() <= 0)
+        if (mon->getHP() <= 0)
         {
             clear();
             printw("HELLS YA YA WON YA SONOFAITCH");
             refresh();
         }
-        if (plr.getHP() <= 0)
+        if (plr->getHP() <= 0)
         {
             clear();
             printw("YA DIED YA STUPID BITCH WAHAHAHAHA");
@@ -272,7 +267,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,mon.getSymbol());
+                    mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'|');
                     arrwy--;
                     refresh();
@@ -285,7 +280,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,mon.getSymbol());
+                    mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'|');
                     arrwy++;
                     refresh();
@@ -298,7 +293,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,mon.getSymbol());
+                    mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'-');
                     arrwx--;
                     refresh();
@@ -311,7 +306,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,mon.getSymbol());
+                    mvaddch(posY,posX,mon->getSymbol());
                     mvaddch(arrwy,arrwx,'-');
                     arrwx++;
                     refresh();
@@ -340,7 +335,7 @@ public:
                 if(posX == prox && chaX > posY)
                 {
                     mvaddch(posY,posX,'X');
-                    mon.damage(plr.getAttack());
+                    mon->damage(plr->getAttack());
                 }
                 break;
                 
@@ -348,7 +343,7 @@ public:
                 if(posX == prox && chaX < posY)
                 {
                     mvaddch(posY,posX,'X');
-                    mon.damage(plr.getAttack());
+                    mon->damage(plr->getAttack());
                 }
                 break;
                 
@@ -356,7 +351,7 @@ public:
                 if(posY == prox && chaY > posX)
                 {
                     mvaddch(posY,posX,'X');
-                    mon.damage(plr.getAttack());
+                    mon->damage(plr->getAttack());
                 }
                 break;
                 
@@ -364,7 +359,7 @@ public:
                 if(posY == prox && chaY < posX)
                 {
                     mvaddch(posY,posX,'X');
-                    mon.damage(plr.getAttack());
+                    mon->damage(plr->getAttack());
                 }
                 break;
                 
@@ -376,11 +371,23 @@ public:
         return;
     }
     
+    void displayScore()
+    {
+        string ps = to_string(plr->getHP());
+        
+        
+        
+        move(0,COLS/2);
+        printw(ps.c_str());
+    }
+    
+    
+    
     
 private:
     map m = map();
-    player plr = player("bob");
-    monster mon = wolf();
+    player* plr;
+    monster* mon;
     int posX = 5;
     int posY = 5;
     int chaX = 5;
