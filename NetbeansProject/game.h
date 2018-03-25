@@ -183,7 +183,8 @@ public:
             {
                 if(_monster_vector[i].isDead() == false)
                 {
-                    mvaddch(_monster_vector[i].getX(), _monster_vector[i].getY(), _monster_vector[i].getSymbol());
+                    mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
+                    move(0,0);
                 }
             }
             m.drawMap();
@@ -199,41 +200,39 @@ public:
         _monster_vector.clear();
         _monster_vector.resize(0);
         
-        int numOfEnemies = rand() % 3 + 1;
+        int numOfEnemies = (rand() % 3) + 1;
         for (int i = 0; i < numOfEnemies; i++)
         {
-            int randEnemy = rand() % 3 + 1;
+            int randEnemy = (rand() % 3) + 1;
             
             if(randEnemy == 1)
             {
                 monster temp1 = wolf();
                 _monster_vector.push_back(temp1);
             }
-            else if(randEnemy == 1)
+            else if(randEnemy == 2)
             {
-                monster temp2 = troll();
-                _monster_vector.push_back(temp2);
+                monster temp = troll();
+                _monster_vector.push_back(temp);
             }
-            else if(randEnemy == 1)
+            else if(randEnemy == 3)
             {
-                monster temp3 = snake();
-                _monster_vector.push_back(temp3);
+                monster temp = snake();
+                _monster_vector.push_back(temp);
             }
         }
         
         for(int i = 0; i < _monster_vector.size(); i++)
         {
-            int monX = (rand() % 51);
-            int monY = (rand() % 17);
+            int monX = (rand() % 53);
+            int monY = (rand() % 19);
             
             _monster_vector[i].relocate(monX, monY);
             
             while(m.isWall(monX, monY) || m.isDoor(monX, monY))
             {
-                monX = (rand() % 51);
-                monY = (rand() % 17);
-                
-                
+                monX = (rand() % 53);
+                monY = (rand() % 19);
             }
             
             _monster_vector[i].relocate(monX, monY);
