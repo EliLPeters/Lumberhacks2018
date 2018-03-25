@@ -122,6 +122,28 @@ public:
             }
         }
         
+        monsterAttack(posY,posX);
+        
+    }
+    
+    void monsterAttack(int posY,int posX)
+    {
+        if(posY == chaX && posX == chaY)
+        {
+            atkCtr++;
+        }
+        if(posY == chaY && posX == chaX)
+        {
+            atkCtr++;
+        }
+        
+        if(atkCtr > 3)
+        {
+            plr.damage(mon.getAttack());
+            mvaddch(chaX,chaY,'X');
+            refresh();
+            atkCtr = 0;
+        }
         
     }
     
@@ -167,7 +189,6 @@ public:
                 mvaddch(chaX,chaY,guy);
             }
         
-        
     }
     
     void battleSequence()
@@ -192,7 +213,8 @@ public:
                 flipY = true;
                 ctr = 0;
             }
-            
+            posX = 20;
+            posY = 20;
             drawBattleField();
             moveMonster(posX,posY,flipX,flipY);
             moveChar(chaX,chaY,dir);
@@ -204,6 +226,12 @@ public:
         {
             clear();
             printw("HELLS YA YA WON YA SONOFAITCH");
+            refresh();
+        }
+        if (plr.getHP() <= 0)
+        {
+            clear();
+            printw("YA DIED YA STUPID BITCH WAHAHAHAHA");
             refresh();
         }
         
@@ -348,10 +376,6 @@ public:
         return;
     }
     
-    int monsterAttack()
-    {
-        
-    }
     
 private:
     map m = map();
@@ -363,6 +387,7 @@ private:
     int chaY = 7;
     bool flipX = true;
     bool flipY = true;
+    int atkCtr = 0;
     char dir = 'u';
 };
 

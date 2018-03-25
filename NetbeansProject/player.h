@@ -20,7 +20,7 @@ public:
     player(string sName)
     {
         _symbol = '@';
-        _HP = 20;
+        _HP = 100;
         _attack = 5;
         _name = sName;
         _X = 10;
@@ -37,6 +37,11 @@ public:
     {
         enemy.changeHP(0);
         //changeHP(enemy.getDamage());
+    }
+    
+    void damage(int dam)
+    {
+        _HP -= dam;
     }
     
     void move(int ch)

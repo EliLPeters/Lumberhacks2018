@@ -55,7 +55,6 @@ public:
     
     void mainMenu()
     {
-        battle b = battle();
         int choice = 0;
         while(_terminate == false)
         {
@@ -99,7 +98,9 @@ public:
                         _terminate = true;
                         return;
                     case 3:
-                        b.battleSequence();
+                        player pl = player("Dave");
+                        monster w = troll();
+                        battle b = battle(w,pl);
                         break;
                 }
             }
