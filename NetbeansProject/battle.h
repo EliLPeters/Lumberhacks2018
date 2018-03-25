@@ -72,7 +72,7 @@ public:
         
         if (flipX == true)
         {
-            if(chaX > posX)
+            if(chaY > posX)
             {
                 if(posX < COLS){posX++;}
             }
@@ -83,7 +83,7 @@ public:
         }
         else
         {
-            if(chaX > posX)
+            if(chaY > posX)
             {
                 if(posX > 0){posX--;}
             }
@@ -96,7 +96,7 @@ public:
         //Up and down movement
         if (flipY == true)
         {
-           if(chaY > posY)
+           if(chaX > posY)
             {
                 if(posY < LINES-2){posY++;}
             }
@@ -107,7 +107,7 @@ public:
         }
         else
         {
-            if(chaY > posX)
+            if(chaX > posX)
             {
                 if(posY > 0){posY--;}
             }
@@ -149,28 +149,28 @@ public:
         
         if(ch == 'i')
             {
-                if(chaX > 1) {chaX--;}
+                if(chaX > 1) {chaX -= 2;}
                 dir = 'u';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
             }
             else if(ch == 'k')
             {
-                if (chaX < LINES-2) {chaX++;}
+                if (chaX < LINES-2) {chaX += 2;}
                 dir = 'd';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
             }
             else if(ch == 'l')
             {
-                if (chaY < COLS-2){chaY++;}
+                if (chaY < COLS-2){chaY += 2;}
                 dir = 'r';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
             }
             else if(ch == 'j')
             {
-                if (chaY > 1) {chaY--;}  
+                if (chaY > 1) {chaY-=2;}  
                 dir = 'l';
                 mvaddch(chaX,chaY,guy);
                 //m.drawMap();
@@ -201,12 +201,13 @@ public:
             
             clear();
             bgHelper();
-            if(ctr > 50)
+            if(ctr > 60)
             {
                 flipX = coinFlip();
                 flipY = coinFlip();
             }
-            if(ctr > 80)
+            
+            if(ctr > 100)
             {
                 flipX = true;
                 flipY = true;
