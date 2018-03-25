@@ -11,6 +11,7 @@
 #include <ncurses.h>
 #include "game.h"
 #include "battle.h"
+#include "genMaps.h"
 
 using namespace std;
 
@@ -20,6 +21,8 @@ using namespace std;
 
 int main() {
 
+    outputMap();
+    
     game g = game();
   
     endwin();

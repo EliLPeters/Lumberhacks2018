@@ -213,8 +213,6 @@ public:
                 flipY = true;
                 ctr = 0;
             }
-            posX = 20;
-            posY = 20;
             drawBattleField();
             moveMonster(posX,posY,flipX,flipY);
             moveChar(chaX,chaY,dir);
