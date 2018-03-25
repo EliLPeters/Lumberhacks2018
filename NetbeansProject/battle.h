@@ -198,6 +198,7 @@ public:
             if(ch == 'q'){break;}
             
             clear();
+            bgHelper();
             if(ctr > 50)
             {
                 flipX = coinFlip();
@@ -221,6 +222,7 @@ public:
         if (mon->getHP() <= 0)
         {
             clear();
+            bgHelper();
             printw("Aw yeah, it super dead");
             getch();
             refresh();
@@ -228,6 +230,7 @@ public:
         if (plr->getHP() <= 0)
         {
             clear();
+            bgHelper();
             printw("HA! Whata Loser!");
             getch();
             refresh();
@@ -390,6 +393,19 @@ public:
         move(1,20);
         printw(es.c_str());    
     }
+    
+    void bgHelper()
+    {
+        attron(COLOR_PAIR(1));
+        for(int i = 0; i < LINES; i++)
+        {
+            for(int j = 0; j < COLS; j++)
+            {
+                mvaddch(i,j,' ');
+            }
+        }
+    }
+    
     
 private:
     map m = map();
