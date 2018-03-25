@@ -105,7 +105,8 @@ public:
                     }
                     else if(m.isDoor(p.getX(), (p.getY() - 1)))
                     {
-                        
+                        m.newRoom('n');
+                        p.relocate(p.getX(), 17);
                     }
                     break;
                 case 'j':
@@ -115,7 +116,8 @@ public:
                     }
                     else if(m.isDoor((p.getX() - 1), p.getY()))
                     {
-                        
+                        m.newRoom('w');
+                        p.relocate(51, p.getY());
                     }
                     break;
                 case 'k':
@@ -125,7 +127,8 @@ public:
                     }
                     else if(m.isDoor(p.getX(), (p.getY() + 1)))
                     {
-                        
+                        m.newRoom('s');
+                        p.relocate(p.getX(), 1);
                     }
                     break;
                 case 'l':
@@ -135,7 +138,8 @@ public:
                     }
                     else if(m.isDoor((p.getX() + 1), p.getY()))
                     {
-                        
+                        m.newRoom('e');
+                        p.relocate(1, p.getY());
                     }
                     break;
             }

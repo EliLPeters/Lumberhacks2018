@@ -33,20 +33,6 @@ public:
         srand(time(NULL));
         ifstream read;
         read.open("NetbeansProject/rooms.txt");
-        /*
-        while(read.is_open() && read.good())
-        {
-            string line = "";
-            getline(read, line);
-            vector<char> curline;
-            
-            for(int i = 0; i < line.length(); i++)
-            {
-                curline.push_back(line.at(i));
-            }
-            _cur_room.push_back(curline);
-        }
-        */
         
         while(read.is_open() && read.good())
         {
