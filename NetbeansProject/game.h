@@ -403,6 +403,8 @@ public:
         printw("Use IJKL to move.  When in combat use A to shoot.");
         move(2,0);
         printw("Bullets will travel in last direction you moved.");
+        move(3,0);
+        printw("Monsters can walk through walls and are invisible While doing so.");
         getch();
         clear();
         bgHelper();

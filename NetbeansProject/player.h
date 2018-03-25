@@ -24,8 +24,8 @@ public:
         _HP = 20;
         _attack = 5;
         _name = "test";
-        _X = 10;
-        _Y = 10;
+        _X = 30;
+        _Y = 14;
     }
     player(string sName)
     {
@@ -33,8 +33,8 @@ public:
         _HP = 100;
         _attack = 5;
         _name = sName;
-        _X = 10;
-        _Y = 10;
+        _X = 51;
+        _Y = 17;
     }
     
     // Destructor
