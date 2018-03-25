@@ -46,9 +46,10 @@ public:
         keypad(stdscr, TRUE);
         nodelay(stdscr, FALSE);
         start_color();
-        init_pair(1, COLOR_WHITE, COLOR_BLUE);
+        init_pair(1, COLOR_WHITE, COLOR_BLACK);
         init_pair(2, COLOR_BLACK, COLOR_WHITE);
-        init_pair(3, COLOR_GREEN, COLOR_BLUE);
+        init_pair(3, COLOR_GREEN, COLOR_BLACK);
+        init_pair(4, COLOR_RED, COLOR_BLACK);
         curs_set(0);
         //refresh();
         while(_terminate == false)
@@ -75,20 +76,22 @@ public:
             move(2,0);
             printw("  High Scores");
             move(4,0);
+            printw("  About");
+            move(6,0);
             printw("  Quit");
             mvaddch((choice * 2), 0, '>');
             refresh();
             int ch = getch();
-            if(ch == KEY_UP)
+            if(ch == 'i')
             {
                 if(choice > 0)
                 {
                     choice--;
                 }
             }
-            else if(ch == KEY_DOWN)
+            else if(ch == 'k')
             {
-                if(choice < 2)
+                if(choice < 3)
                 {
                     choice ++;
                 }
@@ -106,12 +109,11 @@ public:
                         getHigh();
                         break;
                     case 2:
+                        getInfo();
+                        break;
+                    case 3:
                         _terminate = true;
                         return;
-                    case 3:
-                        player pl = player("Dave");
-                        monster w = troll();
-                        battle b = battle(w,pl);
                         break;
                 }
             }
@@ -220,13 +222,17 @@ public:
             }            
             clear();
             bgHelper();
+            attron(COLOR_PAIR(3));
             mvaddch(p.getY(), p.getX(), p.getSymbol());
+            attron(COLOR_PAIR(1));
             for(int i = 0; i < _monster_vector.size(); i++)
             {
                 if(_monster_vector[i].isDead() == false)
                 {
                     _monster_vector[i].moveWorld(p);
+                    attron(COLOR_PAIR(4));
                     mvaddch(_monster_vector[i].getY(), _monster_vector[i].getX(), _monster_vector[i].getSymbol());
+                    attron(COLOR_PAIR(1));
                     if(_monster_vector[i].getX() == p.getX() && _monster_vector[i].getY() == p.getY())
                     {
                         battle b = battle(_monster_vector[i], p);
@@ -368,6 +374,21 @@ public:
         bgHelper();
         
         in.close();
+    }
+    
+    void getInfo()
+    {
+        clear();
+        bgHelper();
+        move(0,0);
+        printw("Objective is to kill as many monsters as possible.");
+        move(1,0);
+        printw("Use IJKL to move.  When in combat use A to shoot.");
+        move(2,0);
+        printw("Bullets will travel in last direction you moved.");
+        getch();
+        clear();
+        bgHelper();
     }
     
     void exitHelper()
