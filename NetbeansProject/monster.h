@@ -24,6 +24,23 @@ public:
         _Y = y;
     }
     
+    bool isDead()
+    {
+        if(_HP <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    
+    void damage(int dam)
+    {
+        _HP -= dam;
+    }
+    
     monster()
     {
         
@@ -132,31 +149,5 @@ public:
     }
     
 };
-
-void createEnemies(vector<monster>& enemies)
-{
-    srand(time(NULL));
-        int numOfEnemies = rand() % 3 + 1;
-        for (int i = 0; i < numOfEnemies; i++)
-        {
-            int randEnemy = rand() % 3 + 1;
-            
-            if (randEnemy == 1)
-            {
-                monster temp = wolf();
-                enemies.push_back(temp);
-            }
-            else if (randEnemy == 2)
-            {
-                monster temp = troll();
-                enemies.push_back(temp);
-            }
-            else if (randEnemy == 3)
-            {
-                monster temp = snake();
-                enemies.push_back(temp);
-            }
-        }
-}
 
 #endif /* MONSTER_H */
