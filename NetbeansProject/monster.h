@@ -53,7 +53,7 @@ public:
     
     void attack(unit &player)
     {
-        player.changeHP(_damage);
+        //player.changeHP(_damage);
     }
     
     virtual void moveRand(unit myMonster)

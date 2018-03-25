@@ -36,7 +36,7 @@ public:
         
     }
 
-    battle(monster mons, player playr)
+    battle(monster &mons, player &playr)
     {
         plr = playr;
         mon = mons;
@@ -69,7 +69,7 @@ public:
     void moveMonster(int &posX, int &posY,bool &flipX, bool &flipY)
     {
         usleep(100000);
-        mvaddch(posY,posX,'$');
+        mvaddch(posY,posX,mon.getSymbol());
         
         //Side to side movement
         
@@ -95,9 +95,6 @@ public:
                 if(posX < COLS){posX++;}
             }   
         }
-        
-        
-        
         
         //Up and down movement
         if (flipY == true)
@@ -193,8 +190,7 @@ public:
                 flipY = true;
                 ctr = 0;
             }
-            posX = 5;
-            posY = 5;
+            
             drawBattleField();
             moveMonster(posX,posY,flipX,flipY);
             moveChar(chaX,chaY,dir);
@@ -206,6 +202,7 @@ public:
         {
             clear();
             printw("HELLS YA YA WON YA SONOFAITCH");
+            refresh();
         }
         
         return;
@@ -245,7 +242,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,'$');
+                    mvaddch(posY,posX,mon.getSymbol());
                     mvaddch(arrwy,arrwx,'|');
                     arrwy--;
                     refresh();
@@ -258,7 +255,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,'$');
+                    mvaddch(posY,posX,mon.getSymbol());
                     mvaddch(arrwy,arrwx,'|');
                     arrwy++;
                     refresh();
@@ -271,7 +268,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,'$');
+                    mvaddch(posY,posX,mon.getSymbol());
                     mvaddch(arrwy,arrwx,'-');
                     arrwx--;
                     refresh();
@@ -284,7 +281,7 @@ public:
                     clear();
                     drawBattleField();
                     mvaddch(chaX,chaY,'@');
-                    mvaddch(posY,posX,'$');
+                    mvaddch(posY,posX,mon.getSymbol());
                     mvaddch(arrwy,arrwx,'-');
                     arrwx++;
                     refresh();
