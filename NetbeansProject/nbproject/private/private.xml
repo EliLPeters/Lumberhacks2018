@@ -7,13 +7,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/unit.h</file>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/map.h</file>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/battle.h</file>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/main.cpp</file>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/monster.h</file>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/game.h</file>
-            <file>file:/home/melanos/Lumberhacks2018/NetbeansProject/player.h</file>
+            <file>file:/home/melanos/Code/Lumberhacks2018/NetbeansProject/game.h</file>
+            <file>file:/home/melanos/Code/Lumberhacks2018/NetbeansProject/battle.h</file>
         </group>
     </open-files>
 </project-private>

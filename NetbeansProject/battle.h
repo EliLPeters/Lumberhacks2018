@@ -223,7 +223,10 @@ public:
         {
             clear();
             bgHelper();
-            printw("Aw yeah, it super dead");
+            move(10,10);
+            printw("Heck ya, you killed it!");
+            getch();
+            getch();
             getch();
             refresh();
         }
@@ -231,7 +234,10 @@ public:
         {
             clear();
             bgHelper();
+            move(10,10);
             printw("HA! Whata Loser!");
+            getch();
+            getch();
             getch();
             refresh();
         }
@@ -268,7 +274,7 @@ public:
         {
             case 'u':
                 while(arrwy > 0){
-                   usleep(50000);
+                   usleep(20000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -282,7 +288,7 @@ public:
                 
             case 'd':
                 while(arrwy < LINES){
-                   usleep(50000);
+                   usleep(20000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -296,7 +302,7 @@ public:
                 
             case 'l':
                 while(arrwx > 0){
-                   usleep(20000);
+                   usleep(10000);
                     clear();
                     drawBattleField();
                     displayScore();
@@ -310,7 +316,7 @@ public:
                 
             case 'r':
                 while(arrwx < COLS){
-                   usleep(20000);
+                   usleep(10000);
                     clear();
                     drawBattleField();
                     displayScore();
